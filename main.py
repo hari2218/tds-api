@@ -20,6 +20,7 @@ def load_marks():
     with open("q-vercel-python.json", "r") as file:
         return json.load(file)
 
+# Hari
 
 @app.get("/api")
 async def get_marks(name: List[str] = Query(...)):

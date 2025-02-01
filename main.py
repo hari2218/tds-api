@@ -1,8 +1,8 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Query
 from fastapi.middleware.cors import CORSMiddleware
-from typing import List
 from fastapi.responses import JSONResponse
 import json
+from typing import List
 
 app = FastAPI()
 
@@ -22,7 +22,7 @@ def load_marks():
 
 
 @app.get("/api")
-async def get_marks(name: List[str]):
+async def get_marks(name: List[str] = Query(...)):
     student_marks = load_marks()
     marks = [student_marks[n] for n in name]
     return JSONResponse(content={"marks": marks})

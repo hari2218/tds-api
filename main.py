@@ -29,6 +29,6 @@ async def get_marks(name: List[str] = Query(...)):
     marks_lookup = {entry["name"]: entry["marks"] for entry in student_marks}
 
     # Retrieve marks for requested names
-    marks = [marks_lookup.get(n, 0) for n in name]
+    marks = [marks_lookup.get(n, n) for n in name]
 
     return JSONResponse(content={"marks": marks})

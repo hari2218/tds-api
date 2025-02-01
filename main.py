@@ -24,5 +24,10 @@ def load_marks():
 @app.get("/api")
 async def get_marks(name: List[str] = Query(...)):
     student_marks = load_marks()
-    marks = [student_marks[n] for n in name]
+    # Create a lookup dictionary for faster search
+    marks_lookup = {entry["name"]: entry["marks"] for entry in student_marks}
+
+    # Retrieve marks for requested names
+    marks = [marks_lookup.get(n, 0) for n in name]
+
     return JSONResponse(content={"marks": marks})
